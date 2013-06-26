@@ -54,11 +54,11 @@
 
 	$.fn.render = function (templateName, data) {
 		var url = resolveTemplatePath(templateName);
-		if (url in cache) {
-			this.html(cache[url](data)).trigger('render', templateName, data);
+		if (cache.hasOwnProperty(url)) {
+			this.html(cache[url](data)).trigger('render', [templateName, data]);
 		} else {
 			$.get(url, function (template) {
-				this.html((cache[url] = Handlebars.compile(template))(data)).trigger('render', templateName, data);
+				this.html((cache[url] = Handlebars.compile(template))(data)).trigger('render', [templateName, data]);
 			}, 'text');
 		}
 		return this;
