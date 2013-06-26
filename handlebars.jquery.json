@@ -7,9 +7,13 @@
 		"email": "a71104@gmail.com",
 		"url": "https://github.com/71104"
 	},
-	"licenses": [
-		"MIT"
-	],
+	"licenses": [{
+		"type": "MIT",
+		"url": "https://raw.github.com/71104/jquery-handlebars/master/LICENSE"
+	}],
+	"dependencies": {
+		"jquery": ">=1.0"
+	},
 	"description": "A templating engine for jQuery based on Handlebars.js",
 	"keywords": [
 		"template",
