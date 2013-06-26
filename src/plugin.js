@@ -1,4 +1,6 @@
 (function ($) {
+	'use strict';
+
 	var cache = {};
 
 	var defaultSettings = {
@@ -44,7 +46,7 @@
 				} else {
 					names = options.partials.split(/\s+/g);
 				}
-				for (var i in names) {
+				for (var i = 0; i < names.length; i++) {
 					registerPartial(names[i], names[i]);
 				}
 			}
@@ -61,8 +63,7 @@
 				}
 				break;
 			default:
-				console.log('invalid action specified to jQuery.handlebars: ' + arguments[0]);
-				break;
+				throw 'invalid action specified to jQuery.handlebars: ' + arguments[0];
 			}
 		}
 	};
@@ -73,7 +74,8 @@
 			this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
 		} else {
 			$.get(url, function (template) {
-				this.html((cache[url] = Handlebars.compile(template))(data)).trigger('render.handlebars', [templateName, data]);
+				cache[url] = Handlebars.compile(template);
+				this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
 			}, 'text');
 		}
 		return this;
