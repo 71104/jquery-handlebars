@@ -1,4 +1,4 @@
 jquery-handlebars
 =================
 
-A jQuery plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements
+A [jQuery](http://jquery.com/) plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements
