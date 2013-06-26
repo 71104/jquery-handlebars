@@ -1,6 +1,9 @@
 jquery-handlebars
 =================
 
+*Work in progress*
+------------------
+
 A [jQuery](http://jquery.com/) plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements.
 
 Template scripts are retrieved through AJAX, precompiled and cached.
