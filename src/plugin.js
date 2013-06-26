@@ -27,8 +27,27 @@
 		return resolvePath(settings.partialPath, name, settings.partialExtension);
 	}
 
+	function registerPartial(path, name, callback) {
+		$.get(resolvePartialPath(path), function (partial) {
+			Handlebars.registerPartial(name, partial);
+			callback();
+		}, 'text');
+	}
+
 	$.handlebars = function () {
 		if (typeof arguments[0] !== 'string') {
+			var options = arguments[0];
+			if (options.hasOwnProperty('partials')) {
+				var names;
+				if (typeof options.partials !== 'string') {
+					names = options.partials;
+				} else {
+					names = options.partials.split(/\s+/g);
+				}
+				for (var i in names) {
+					registerPartial(names[i], names[i]);
+				}
+			}
 			settings = $.extend(defaultSettings, arguments[0]);
 			settings.templatePath = settings.templatePath.replace(/\\\/$/, '');
 			settings.partialPath = settings.partialPath.replace(/\\\/$/, '');
@@ -36,13 +55,9 @@
 			switch (arguments[0]) {
 			case 'partial':
 				if (arguments.length < 3) {
-					$.get(resolvePartialPath(arguments[1], function (partial) {
-						Handlebars.registerPartial(arguments[1], partial);
-					}), 'text');
+					registerPartial(arguments[1], arguments[1]);
 				} else {
-					$.get(resolvePartialPath(arguments[1], function (partial) {
-						Handlebars.registerPartial(arguments[2], partial);
-					}), 'text');
+					registerPartial(arguments[1], arguments[2]);
 				}
 				break;
 			default:
@@ -55,10 +70,10 @@
 	$.fn.render = function (templateName, data) {
 		var url = resolveTemplatePath(templateName);
 		if (cache.hasOwnProperty(url)) {
-			this.html(cache[url](data)).trigger('render', [templateName, data]);
+			this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
 		} else {
 			$.get(url, function (template) {
-				this.html((cache[url] = Handlebars.compile(template))(data)).trigger('render', [templateName, data]);
+				this.html((cache[url] = Handlebars.compile(template))(data)).trigger('render.handlebars', [templateName, data]);
 			}, 'text');
 		}
 		return this;
