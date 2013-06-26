@@ -1,6 +1,6 @@
 {
 	"name": "jquery-handlebars",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A templating engine for jQuery based on Handlebars.js",
 	"keywords": [
 		"template",
