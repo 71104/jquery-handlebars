@@ -62,6 +62,9 @@
 					registerPartial(arguments[1], arguments[2]);
 				}
 				break;
+			case 'helper':
+				Handlebars.registerHelper(arguments[1], arguments[2]);
+				break;
 			default:
 				throw 'invalid action specified to jQuery.handlebars: ' + arguments[0];
 			}

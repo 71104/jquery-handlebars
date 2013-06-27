@@ -8,7 +8,7 @@ Template scripts are retrieved through AJAX, precompiled and cached.
 Download
 --------
 
-[Version 0.1.4](https://raw.github.com/71104/jquery-handlebars/0.1.4/bin/jquery-handlebars-0.1.4.min.js) available.
+[Version 1.0](https://raw.github.com/71104/jquery-handlebars/1.0.0/bin/jquery-handlebars-1.0.0.min.js) available.
 
 Getting Started
 ---------------
@@ -25,8 +25,8 @@ Example:
 ```
 
 ```javascript
-// will fetch <content.handlebars> and render to the DOM element whose id is "content"
-$('#content').render('content', {
+// will fetch <template.handlebars> and render to the DOM element whose id is "content"
+$('#content').render('template', {
 	field1: 'Hello',
 	field2: 'world!'
 });
@@ -45,6 +45,11 @@ $('#some-element').render('content', {
 	// ...
 });
 ```
+
+The second argument to the `render` method is of course the context to use in Handlebars to render the template.
+
+Helpers and partials
+--------------------
 
 When using this plugin you can use the `Handlebars` namespace normally if you want; this allows you to register helpers and partials.
 

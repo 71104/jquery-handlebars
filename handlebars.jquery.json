@@ -1,6 +1,6 @@
 {
 	"name": "handlebars",
-	"version": "0.1.4",
+	"version": "1.0.0",
 	"title": "Handlebars-based templating engine for jQuery",
 	"author": {
 		"name": "Alberto La Rocca",
@@ -24,7 +24,7 @@
 		"partial",
 		"partials"
 	],
-	"homepage": "https://github.com/71104/jquery-handlebars",
-	"download": "https://raw.github.com/71104/jquery-handlebars/0.1.4/bin/jquery-handlebars-0.1.4.min.js",
+	"homepage": "https://71104.github.io/jquery-handlebars",
+	"download": "https://raw.github.com/71104/jquery-handlebars/1.0.0/bin/jquery-handlebars-1.0.0.min.js",
 	"bugs": "https://github.com/71104/jquery-handlebars/issues"
 }
