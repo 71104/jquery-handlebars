@@ -109,7 +109,7 @@ you can access it in your templates normally:
 ```
 
 ```javascript
-$('#content').render('content', {
+$('#content').render('template', {
 	array: ['first', 'second', 'last']
 });
 ```
