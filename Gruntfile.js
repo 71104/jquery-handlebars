@@ -55,12 +55,24 @@ module.exports = function (grunt) {
 				],
 				dest: 'bin/jquery-handlebars-<%= pkg.version %>.min.js'
 			}
+		},
+
+		concat: {
+			dist: {
+				src: [
+					'src/handlebars-1.0.0.js',
+					'src/plugin.js'
+				],
+				dest: 'bin/jquery-handlebars-<%= pkg.version %>.js'
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	grunt.registerTask('default', ['clean', 'jshint', 'uglify']);
+	grunt.registerTask('debug', ['clean', 'jshint', 'concat']);
 };
