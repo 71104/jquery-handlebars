@@ -20,16 +20,11 @@ Each jQuery object has a `render` method that:
 
 Example:
 
-```html
+```handlebars
 <p>{{ field1 }}, {{ field2 }}</p>
 ```
 
 ```javascript
-// configure template directory; this must be only once
-$.handlebars({
-	templatePath: 'templates'
-});
-
 /* will fetch <templates/content.handlebars> and render to the DOM element whose
 	id is "content" */
 $('#content').render('content', {
@@ -38,7 +33,7 @@ $('#content').render('content', {
 });
 ```
 
-The first argument to the `render` method is a template name. The plugin builds the template path to fetch from this name by prepending a base path and appending a file name extension. The default base path is the empty string, while the default extension if `.handlebars`. To configure them differently use the `jQuery.handlebars` method:
+The first argument to the `render` method is a template name. The plugin builds the template path to fetch from this name by prepending a base path and appending a file name extension. The default base path is the empty string, while the default extension is `.handlebars`. To configure them differently use the `jQuery.handlebars` method:
 
 ```javascript
 $.handlebars({
@@ -47,9 +42,11 @@ $.handlebars({
 });
 ```
 
-When using this plugin you can use the `Handlebars` namespace normally if you want; this allows you to register helpers and partials, for example.
+When using this plugin you can use the `Handlebars` namespace normally if you want; this allows you to register helpers and partials.
 
-```html
+For example:
+
+```handlebars
 {{! I'm using a custom "salute" helper }}
 <p>{{salute what }}</p>
 
@@ -99,7 +96,7 @@ At this point, supposing you have the following `partials/element.partial` file:
 
 you can access it in your templates normally:
 
-```html
+```handlebars
 <ul>
 {{#each array }}
 	{{> element }}
