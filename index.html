@@ -41,7 +41,7 @@
 <h2>
 <a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h2>
 
-<p><a href="https://raw.github.com/71104/jquery-handlebars/0.1.4/bin/jquery-handlebars-0.1.4.min.js">Version 0.1.4</a> available.</p>
+<p><a href="https://raw.github.com/71104/jquery-handlebars/1.0.0/bin/jquery-handlebars-1.0.0.min.js">Version 1.0</a> available.</p>
 
 <h2>
 <a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
@@ -57,8 +57,8 @@
 <pre lang="handlebars"><code>&lt;p&gt;{{ field1 }}, {{ field2 }}&lt;/p&gt;
 </code></pre>
 
-<div class="highlight"><pre><span class="c1">// will fetch &lt;content.handlebars&gt; and render to the DOM element whose id is "content"</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="c1">// will fetch &lt;template.handlebars&gt; and render to the DOM element whose id is "content"</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'template'</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">field1</span><span class="o">:</span> <span class="s1">'Hello'</span><span class="p">,</span>
     <span class="nx">field2</span><span class="o">:</span> <span class="s1">'world!'</span>
 <span class="p">});</span>
@@ -76,6 +76,11 @@
     <span class="c1">// ...</span>
 <span class="p">});</span>
 </pre></div>
+
+<p>The second argument to the <code>render</code> method is of course the context to use in Handlebars to render the template.</p>
+
+<h2>
+<a name="helpers-and-partials" class="anchor" href="#helpers-and-partials"><span class="octicon octicon-link"></span></a>Helpers and partials</h2>
 
 <p>When using this plugin you can use the <code>Handlebars</code> namespace normally if you want; this allows you to register helpers and partials.</p>
 
