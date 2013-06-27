@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="jquery-handlebars : A jQuery plugin to render Handlebars.js templates into elements" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>jquery-handlebars</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/71104/jquery-handlebars">View on GitHub</a>
+
+          <h1 id="project_title">jquery-handlebars</h1>
+          <h2 id="project_tagline">A jQuery plugin to render Handlebars.js templates into elements</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/71104/jquery-handlebars/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/71104/jquery-handlebars/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="jquery-handlebars" class="anchor" href="#jquery-handlebars"><span class="octicon octicon-link"></span></a>jquery-handlebars</h1>
+
+<p>A <a href="http://jquery.com/">jQuery</a> plugin to render <a href="http://handlebarsjs.com/">Handlebars.js</a> templates into elements.</p>
+
+<p>Template scripts are retrieved through AJAX, precompiled and cached.</p>
+
+<h2>
+<a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h2>
+
+<p><a href="https://raw.github.com/71104/jquery-handlebars/0.1.4/bin/jquery-handlebars-0.1.4.min.js">Version 0.1.4</a> available.</p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Each jQuery object has a <code>render</code> method that:</p>
+
+<ul>
+<li>retrieves the specified template (either from cache or by fetching through AJAX and compiling with Handlebars),</li>
+<li>renders it through Handlebars using the specified context object,</li>
+<li>passes the output string to the jQuery object's <code>html</code> method.</li>
+</ul><p>Example:</p>
+
+<pre lang="handlebars"><code>&lt;p&gt;{{ field1 }}, {{ field2 }}&lt;/p&gt;
+</code></pre>
+
+<div class="highlight"><pre><span class="c1">// will fetch &lt;content.handlebars&gt; and render to the DOM element whose id is "content"</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">field1</span><span class="o">:</span> <span class="s1">'Hello'</span><span class="p">,</span>
+    <span class="nx">field2</span><span class="o">:</span> <span class="s1">'world!'</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>The first argument to the <code>render</code> method is a template name. The plugin builds the template path to fetch from this name by prepending a base path and appending a file name extension. The default base path is the empty string, while the default extension is <code>.handlebars</code>. To configure them differently use the <code>jQuery.handlebars</code> method:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
+    <span class="nx">templatePath</span><span class="o">:</span> <span class="s1">'path/to/templates'</span><span class="p">,</span>
+    <span class="nx">templateExtension</span><span class="o">:</span> <span class="s1">'hbs'</span>
+<span class="p">});</span>
+
+<span class="c1">// now this will fetch &lt;path/to/templates/content.hbs&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#some-element'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>When using this plugin you can use the <code>Handlebars</code> namespace normally if you want; this allows you to register helpers and partials.</p>
+
+<p>For example:</p>
+
+<pre lang="handlebars"><code>{{! I'm using a custom "salute" helper }}
+&lt;p&gt;{{salute what }}&lt;/p&gt;
+
+{{! I'm using a custom "csv" block helper }}
+{{#csv array }}{{ this }}{{/csv}}
+</code></pre>
+
+<div class="highlight"><pre><span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">'salute'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">what</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'Hello, '</span> <span class="o">+</span> <span class="nx">what</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">'csv'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">options</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+    <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">what</span><span class="o">:</span> <span class="s1">'world'</span><span class="p">,</span>
+    <span class="nx">array</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>The plugin also supports fetching and registering partials. You only need to configure the base path and filename extension for the partial files in the <code>jQuery.handlebars</code> method:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
+    <span class="nx">partialPath</span><span class="o">:</span> <span class="s1">'partials'</span><span class="p">,</span>
+    <span class="nx">partialExtension</span><span class="o">:</span> <span class="s1">'partial'</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>Then you can register a partial using the <code>partial</code> action of the <code>jQuery.handlebars</code> method:</p>
+
+<div class="highlight"><pre><span class="cm">/* based on configured settings, this will fetch the &lt;partials/element.partial&gt;</span>
+<span class="cm">    file and register it as a partial */</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">(</span><span class="s1">'partial'</span><span class="p">,</span> <span class="s1">'element'</span><span class="p">);</span>
+</pre></div>
+
+<p>At this point, assuming you have the following <code>partials/element.partial</code> file:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;li&gt;</span>{{ this }}<span class="nt">&lt;/li&gt;</span>
+</pre></div>
+
+<p>you can access it in your templates normally:</p>
+
+<pre lang="handlebars"><code>&lt;ul&gt;
+{{#each array }}
+    {{&gt; element }}
+{{/each}}
+&lt;/ul&gt;
+</code></pre>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'template'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">array</span><span class="o">:</span> <span class="p">[</span><span class="s1">'first'</span><span class="p">,</span> <span class="s1">'second'</span><span class="p">,</span> <span class="s1">'last'</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>As a shorthand you can register all the partials at inizialization time using the <code>partials</code> configuration setting:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
+    <span class="nx">templatePath</span><span class="o">:</span> <span class="s1">'templates'</span><span class="p">,</span>
+    <span class="nx">partialPath</span><span class="o">:</span> <span class="s1">'partials'</span><span class="p">,</span>
+    <span class="nx">partials</span><span class="o">:</span> <span class="p">[</span><span class="s1">'header'</span><span class="p">,</span> <span class="s1">'footer'</span><span class="p">,</span> <span class="s1">'user'</span><span class="p">,</span> <span class="s1">'another-partial'</span><span class="p">,</span> <span class="s1">'another-one'</span><span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT. Copyright 2013 Alberto La Rocca.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">jquery-handlebars maintained by <a href="https://github.com/71104">71104</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-36961344-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
