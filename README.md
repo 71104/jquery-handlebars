@@ -25,8 +25,7 @@ Example:
 ```
 
 ```javascript
-/* will fetch <templates/content.handlebars> and render to the DOM element whose
-	id is "content" */
+// will fetch <content.handlebars> and render to the DOM element whose id is "content"
 $('#content').render('content', {
 	field1: 'Hello',
 	field2: 'world!'
@@ -39,6 +38,11 @@ The first argument to the `render` method is a template name. The plugin builds 
 $.handlebars({
 	templatePath: 'path/to/templates',
 	templateExtension: 'hbs'
+});
+
+// now this will fetch <path/to/templates/content.hbs>
+$('#some-element').render('content', {
+	// ...
 });
 ```
 
@@ -71,7 +75,7 @@ $('#content').render('content', {
 });
 ```
 
-The plugin also supports fetching and caching partials. You only need to configure the base path and filename extension for the partial files in the `jQuery.handlebars` method:
+The plugin also supports fetching and registering partials. You only need to configure the base path and filename extension for the partial files in the `jQuery.handlebars` method:
 
 ```javascript
 $.handlebars({
@@ -88,7 +92,7 @@ Then you can register a partial using the `partial` action of the `jQuery.handle
 $.handlebars('partial', 'element');
 ```
 
-At this point, supposing you have the following `partials/element.partial` file:
+At this point, assuming you have the following `partials/element.partial` file:
 
 ```html
 <li>{{ this }}</li>
@@ -110,7 +114,7 @@ $('#content').render('content', {
 });
 ```
 
-As a shorthand you can register all the partials at inizialization using the `partials` configuration setting:
+As a shorthand you can register all the partials at inizialization time using the `partials` configuration setting:
 
 ```javascript
 $.handlebars({
