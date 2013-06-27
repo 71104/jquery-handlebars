@@ -24,7 +24,7 @@
 		"partial",
 		"partials"
 	],
-	"homepage": "https://71104.github.io/jquery-handlebars",
+	"homepage": "http://71104.github.io/jquery-handlebars",
 	"download": "https://raw.github.com/71104/jquery-handlebars/1.0.0/bin/jquery-handlebars-1.0.0.min.js",
 	"bugs": "https://github.com/71104/jquery-handlebars/issues"
 }
