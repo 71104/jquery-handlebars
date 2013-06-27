@@ -1,6 +1,10 @@
 jquery-handlebars
 =================
 
+A [jQuery](http://jquery.com/) plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements.
+
+Template scripts are retrieved through AJAX, precompiled and cached.
+
 Download
 --------
 
@@ -8,10 +12,6 @@ Download
 
 Getting Started
 ---------------
-
-A [jQuery](http://jquery.com/) plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements.
-
-Template scripts are retrieved through AJAX, precompiled and cached.
 
 Each jQuery object has a `render` method that:
 - retrieves the specified template (either from cache or by fetching through AJAX and compiling with Handlebars),
