@@ -8,7 +8,7 @@ Template scripts are retrieved through AJAX, precompiled and cached.
 Download
 --------
 
-[Version 1.1](https://raw.github.com/71104/jquery-handlebars/1.1.0/bin/jquery-handlebars-1.1.0.min.js) available.
+[Version 1.1](https://raw.github.com/71104/jquery-handlebars/1.1.1/bin/jquery-handlebars-1.1.1.min.js) available.
 
 Getting Started
 ---------------
