@@ -32,7 +32,10 @@
 	function registerPartial(path, name, callback) {
 		$.get(resolvePartialPath(path), function (partial) {
 			Handlebars.registerPartial(name, partial);
-			callback();
+			if (callback)
+			{
+				callback();
+			}
 		}, 'text');
 	}
 
