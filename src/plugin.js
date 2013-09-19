@@ -29,10 +29,9 @@
 		return resolvePath(settings.partialPath, name, settings.partialExtension);
 	}
 
-	function registerPartial(path, name, callback) {
+	function registerPartial(path, name) {
 		$.get(resolvePartialPath(path), function (partial) {
 			Handlebars.registerPartial(name, partial);
-			callback();
 		}, 'text');
 	}
 
