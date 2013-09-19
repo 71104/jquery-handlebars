@@ -41,7 +41,7 @@
 <h2>
 <a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h2>
 
-<p><a href="https://raw.github.com/71104/jquery-handlebars/1.0.1/bin/jquery-handlebars-1.0.1.min.js">Version 1.0</a> available.</p>
+<p><a href="https://raw.github.com/71104/jquery-handlebars/1.1.1/bin/jquery-handlebars-1.1.1.min.js">Version 1.1</a> available.</p>
 
 <h2>
 <a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
@@ -57,7 +57,7 @@
 <pre lang="handlebars"><code>&lt;p&gt;{{ field1 }}, {{ field2 }}&lt;/p&gt;
 </code></pre>
 
-<div class="highlight"><pre><span class="c1">// will fetch &lt;template.handlebars&gt; and render to the DOM element whose id is "content"</span>
+<div class="highlight highlight-javascript"><pre><span class="c1">// will fetch &lt;template.handlebars&gt; and render to the DOM element whose id is "content"</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'template'</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">field1</span><span class="o">:</span> <span class="s1">'Hello'</span><span class="p">,</span>
     <span class="nx">field2</span><span class="o">:</span> <span class="s1">'world!'</span>
@@ -66,7 +66,7 @@
 
 <p>The first argument to the <code>render</code> method is a template name. The plugin builds the template path to fetch from this name by prepending a base path and appending a file name extension. The default base path is the empty string, while the default extension is <code>.handlebars</code>. To configure them differently use the <code>jQuery.handlebars</code> method:</p>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
     <span class="nx">templatePath</span><span class="o">:</span> <span class="s1">'path/to/templates'</span><span class="p">,</span>
     <span class="nx">templateExtension</span><span class="o">:</span> <span class="s1">'hbs'</span>
 <span class="p">});</span>
@@ -93,7 +93,7 @@
 {{#csv array }}{{ this }}{{/csv}}
 </code></pre>
 
-<div class="highlight"><pre><span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">'salute'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">what</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">'salute'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">what</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s1">'Hello, '</span> <span class="o">+</span> <span class="nx">what</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">;</span>
 <span class="p">});</span>
 
@@ -111,7 +111,7 @@
 
 <p>The plugin also supports fetching and registering partials. You only need to configure the base path and filename extension for the partial files in the <code>jQuery.handlebars</code> method:</p>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
     <span class="nx">partialPath</span><span class="o">:</span> <span class="s1">'partials'</span><span class="p">,</span>
     <span class="nx">partialExtension</span><span class="o">:</span> <span class="s1">'partial'</span>
 <span class="p">});</span>
@@ -119,14 +119,14 @@
 
 <p>Then you can register a partial using the <code>partial</code> action of the <code>jQuery.handlebars</code> method:</p>
 
-<div class="highlight"><pre><span class="cm">/* based on configured settings, this will fetch the &lt;partials/element.partial&gt;</span>
+<div class="highlight highlight-javascript"><pre><span class="cm">/* based on configured settings, this will fetch the &lt;partials/element.partial&gt;</span>
 <span class="cm">    file and register it as a partial */</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">(</span><span class="s1">'partial'</span><span class="p">,</span> <span class="s1">'element'</span><span class="p">);</span>
 </pre></div>
 
 <p>At this point, assuming you have the following <code>partials/element.partial</code> file:</p>
 
-<div class="highlight"><pre><span class="nt">&lt;li&gt;</span>{{ this }}<span class="nt">&lt;/li&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;li&gt;</span>{{ this }}<span class="nt">&lt;/li&gt;</span>
 </pre></div>
 
 <p>you can access it in your templates normally:</p>
@@ -138,14 +138,14 @@
 &lt;/ul&gt;
 </code></pre>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'template'</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">render</span><span class="p">(</span><span class="s1">'template'</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">array</span><span class="o">:</span> <span class="p">[</span><span class="s1">'first'</span><span class="p">,</span> <span class="s1">'second'</span><span class="p">,</span> <span class="s1">'last'</span><span class="p">]</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>As a shorthand you can register all the partials at inizialization time using the <code>partials</code> configuration setting:</p>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">handlebars</span><span class="p">({</span>
     <span class="nx">templatePath</span><span class="o">:</span> <span class="s1">'templates'</span><span class="p">,</span>
     <span class="nx">partialPath</span><span class="o">:</span> <span class="s1">'partials'</span><span class="p">,</span>
     <span class="nx">partials</span><span class="o">:</span> <span class="p">[</span><span class="s1">'header'</span><span class="p">,</span> <span class="s1">'footer'</span><span class="p">,</span> <span class="s1">'user'</span><span class="p">,</span> <span class="s1">'another-partial'</span><span class="p">,</span> <span class="s1">'another-one'</span><span class="p">]</span>
