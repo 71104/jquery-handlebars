@@ -38,6 +38,9 @@
 	$.handlebars = function () {
 		if (typeof arguments[0] !== 'string') {
 			var options = arguments[0];
+			settings = $.extend(defaultSettings, arguments[0]);
+			settings.templatePath = settings.templatePath.replace(/\\\/$/, '');
+			settings.partialPath = settings.partialPath.replace(/\\\/$/, '');
 			if (options.hasOwnProperty('partials')) {
 				var names;
 				if (typeof options.partials !== 'string') {
@@ -49,9 +52,6 @@
 					registerPartial(names[i], names[i]);
 				}
 			}
-			settings = $.extend(defaultSettings, arguments[0]);
-			settings.templatePath = settings.templatePath.replace(/\\\/$/, '');
-			settings.partialPath = settings.partialPath.replace(/\\\/$/, '');
 		} else {
 			switch (arguments[0]) {
 			case 'partial':

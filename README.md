@@ -119,7 +119,7 @@ $('#content').render('template', {
 });
 ```
 
-As a shorthand you can register all the partials at inizialization time using the `partials` configuration setting:
+As a shorthand you can register all the partials at initialization time using the `partials` configuration setting:
 
 ```javascript
 $.handlebars({
