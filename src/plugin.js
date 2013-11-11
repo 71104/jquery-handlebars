@@ -70,7 +70,7 @@
 		}
 	};
 
-	$.fn.render = function (templateName, data) {
+	$.fn.render = function (templateName, data, callback) {
 		var url = resolveTemplatePath(templateName);
 		if (cache.hasOwnProperty(url)) {
 			this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
@@ -79,7 +79,7 @@
 			$.get(url, function (template) {
 				cache[url] = Handlebars.compile(template);
 				$this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
-			}, 'text');
+			}, 'text').then(callback);
 		}
 		return this;
 	};

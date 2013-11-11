@@ -16,7 +16,8 @@ Getting Started
 Each jQuery object has a `render` method that:
 - retrieves the specified template (either from cache or by fetching through AJAX and compiling with Handlebars),
 - renders it through Handlebars using the specified context object,
-- passes the output string to the jQuery object's `html` method.
+- passes the output string to the jQuery object's `html` method,
+- optionally allows you to specify a callback function that is executed after rendering the template.
 
 Example:
 
@@ -47,6 +48,16 @@ $('#some-element').render('content', {
 ```
 
 The second argument to the `render` method is of course the context to use in Handlebars to render the template.
+
+The third argument to the `render`method is a optional callback to allow for additional processing after the rendering is done.
+
+```javascript
+$.handlebars.render('content', {
+	// ...
+}, function(output) {
+	alert("Rendering done!");
+});
+```
 
 Helpers and partials
 --------------------
