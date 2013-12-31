@@ -51,18 +51,18 @@
 		return 'cache_' + templateName;
 	}
 
-    function isPreCompiled(templateName) {
-        return Handlebars.hasOwnProperty('templates') &&
-            Handlebars.templates.hasOwnProperty(templateName);
-    }
+	function isPreCompiled(templateName) {
+		return Handlebars.hasOwnProperty('templates') &&
+			Handlebars.templates.hasOwnProperty(templateName);
+	}
 
-    function isCached(templateName) {
-        return cache.hasOwnProperty(getCacheKey(templateName));
-    }
+	function isCached(templateName) {
+		return cache.hasOwnProperty(getCacheKey(templateName));
+	}
 
 	function render($this, templateName, data) {
 		var template = isPreCompiled(templateName) ?
-            Handlebars.templates[templateName] : cache[getCacheKey(templateName)];
+			Handlebars.templates[templateName] : cache[getCacheKey(templateName)];
 		var content = template(data);
 		$this.html(content).trigger('render.handlebars', [templateName, data]);
 	}
