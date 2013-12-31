@@ -30,38 +30,38 @@
 	}
 
 	function registerPartial(path, name) {
-        var promise = null;
-        if (path.charAt(0) === '#') {
-            var defer = $.Deferred();
-            promise = defer.promise();
-            defer.resolve($(path).html());
-        }
-        else {
-            promise = $.ajax({
-                url: resolvePartialPath(path),
-                dataType: 'text'
-            });
-        }
-        promise.done(function (partial) {
-            Handlebars.registerPartial(name, partial);
-        });
+		var promise = null;
+		if (path.charAt(0) === '#') {
+			var defer = $.Deferred();
+			promise = defer.promise();
+			defer.resolve($(path).html());
+		}
+		else {
+			promise = $.ajax({
+				url: resolvePartialPath(path),
+				dataType: 'text'
+			});
+		}
+		promise.done(function (partial) {
+			Handlebars.registerPartial(name, partial);
+		});
 	}
 
-    function getCacheKey(templateName) {
-        return 'cache_' + templateName;
-    }
+	function getCacheKey(templateName) {
+		return 'cache_' + templateName;
+	}
 
-    function render($this, templateName, data) {
-        var cacheKey = getCacheKey(templateName);
-        var template = cache[cacheKey];
-        var content = template(data);
-        $this.html(content).trigger('render.handlebars', [templateName, data]);
-    }
+	function render($this, templateName, data) {
+		var cacheKey = getCacheKey(templateName);
+		var template = cache[cacheKey];
+		var content = template(data);
+		$this.html(content).trigger('render.handlebars', [templateName, data]);
+	}
 
-    function cacheTemplate(templateName, templateContent) {
-        var cacheKey = getCacheKey(templateName);
-        cache[cacheKey] = Handlebars.compile(templateContent);
-    }
+	function cacheTemplate(templateName, templateContent) {
+		var cacheKey = getCacheKey(templateName);
+		cache[cacheKey] = Handlebars.compile(templateContent);
+	}
 
 	$.handlebars = function () {
 		if (typeof arguments[0] !== 'string') {
@@ -99,28 +99,28 @@
 	};
 
 	$.fn.render = function (templateName, data) {
-        var cacheKey = getCacheKey(templateName);
-        if (cache.hasOwnProperty(cacheKey)) {
-            render(this, templateName, data);
-            return this;
-        }
-        var promise = null;
-        if (templateName.charAt(0) === '#') {
-            var defer = $.Deferred();
-            promise = defer.promise();
-            defer.resolve($(templateName).html());
-        }
-        else {
-            promise = $.ajax({
-                url: resolveTemplatePath(templateName),
-                dataType: 'text'
-            });
-        }
-        var $this = this;
-        promise.done(function (template) {
-            cacheTemplate(templateName, template);
-            render($this, templateName, data);
-        });
+		var cacheKey = getCacheKey(templateName);
+		if (cache.hasOwnProperty(cacheKey)) {
+			render(this, templateName, data);
+			return this;
+		}
+		var promise = null;
+		if (templateName.charAt(0) === '#') {
+			var defer = $.Deferred();
+			promise = defer.promise();
+			defer.resolve($(templateName).html());
+		}
+		else {
+			promise = $.ajax({
+				url: resolveTemplatePath(templateName),
+				dataType: 'text'
+			});
+		}
+		var $this = this;
+		promise.done(function (template) {
+			cacheTemplate(templateName, template);
+			render($this, templateName, data);
+		});
 		return this;
 	};
 }(jQuery));
