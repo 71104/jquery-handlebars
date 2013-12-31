@@ -30,9 +30,21 @@
 	}
 
 	function registerPartial(path, name) {
-		$.get(resolvePartialPath(path), function (partial) {
-			Handlebars.registerPartial(name, partial);
-		}, 'text');
+        var promise = null;
+        if (path.charAt(0) === '#') {
+            var defer = $.Deferred();
+            promise = defer.promise();
+            defer.resolve($(path).html());
+        }
+        else {
+            promise = $.ajax({
+                url: resolvePartialPath(path),
+                dataType: 'text'
+            });
+        }
+        promise.done(function (partial) {
+            Handlebars.registerPartial(name, partial);
+        });
 	}
 
     function getCacheKey(templateName) {
