@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				src: [
-					'src/handlebars-1.0.0.js',
+					'src/handlebars-v1.3.0.js',
 					'src/plugin.js'
 				],
 				dest: 'bin/jquery-handlebars-<%= pkg.version %>.min.js'
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 		concat: {
 			dist: {
 				src: [
-					'src/handlebars-1.0.0.js',
+					'src/handlebars-v1.3.0.js',
 					'src/plugin.js'
 				],
 				dest: 'bin/jquery-handlebars-<%= pkg.version %>.js'
