@@ -129,4 +129,4 @@ $.handlebars({
 
 ## License
 
-MIT. Copyright 2013 Alberto La Rocca.
+MIT - Copyright 2014 OneBrand Marketing
