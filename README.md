@@ -1,11 +1,12 @@
 # jquery-handlebars
 
-This is a fork of the [jquery-handlebars project](https://github.com/71104/jquery-handlebars) by [Alberto La Rocca](https://github.com/71104) that doesnt seem to be updated anymore.
-
-**Pull requests are welcome and encouraged!**
 A [jQuery](http://jquery.com/) plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements.
 
-Template scripts are retrieved through AJAX, precompiled and cached.
+-----
+
+*This is a fork of the [jquery-handlebars project](https://github.com/71104/jquery-handlebars)*
+
+**Pull requests are welcome and encouraged!**
 
 
 ## Getting Started
