@@ -79,14 +79,14 @@
 		// 	this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
 		// } else {
 
-			var $this = this;
-			$.get(url, function (template) {
-				cache[url] = Handlebars.compile(template);
-				$this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
-			}, 'text');
+		var $this = this;
+		$.get(url, function (template) {
+			cache[url] = Handlebars.compile(template);
+			$this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
+		}, 'text');
 
 		// }
-		
+
 		return this;
 	};
 }(jQuery));
