@@ -1,22 +1,20 @@
-jquery-handlebars
-=================
+# jquery-handlebars
 
 A [jQuery](http://jquery.com/) plugin to render [Handlebars.js](http://handlebarsjs.com/) templates into elements.
 
-Template scripts are retrieved through AJAX, precompiled and cached.
+-----
 
-Download
---------
+*This is a fork of the [jquery-handlebars project](https://github.com/71104/jquery-handlebars)*
 
-[Version 1.1](https://github.com/71104/jquery-handlebars/archive/1.1.4.zip) available.
+**Pull requests are welcome and encouraged!**
 
-Getting Started
----------------
+
+## Getting Started
 
 Each jQuery object has a `render` method that:
-- retrieves the specified template (either from cache or by fetching through AJAX and compiling with Handlebars),
-- renders it through Handlebars using the specified context object,
-- passes the output string to the jQuery object's `html` method.
+- Retrieves the specified template (either from cache or by fetching through AJAX and compiling with Handlebars)
+- Renders it through Handlebars using the specified context object
+- Passes the output string to the jQuery object's `html` method
 
 Example:
 
@@ -48,8 +46,8 @@ $('#some-element').render('content', {
 
 The second argument to the `render` method is of course the context to use in Handlebars to render the template.
 
-Helpers and partials
---------------------
+
+## Helpers and partials
 
 When using this plugin you can use the `Handlebars` namespace normally if you want; this allows you to register helpers and partials.
 
@@ -129,7 +127,7 @@ $.handlebars({
 });
 ```
 
-License
--------
 
-MIT. Copyright 2013 Alberto La Rocca.
+## License
+
+MIT - Copyright 2014 OneBrand Marketing
