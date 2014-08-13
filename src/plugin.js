@@ -137,11 +137,11 @@
     return this;
   };
 
-  $.fn.renderAsync = function (templateName, data) {
+  $.fn.renderAsync = function (templateName, data, domMethod) {
     var defer = $.Deferred();
     this.one('render.handlebars', function (templateName, data) {
       defer.resolve(templateName, data);
-    }).render(templateName, data);
+    }).render(templateName, data, domMethod);
     return defer.promise();
   };
 }(jQuery));
