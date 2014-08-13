@@ -60,11 +60,14 @@
     return cache.hasOwnProperty(getCacheKey(templateName));
   }
 
-  function render($this, templateName, data) {
+  function render($this, templateName, data, domMethod) {
+    if (!domMethod) {
+      domMethod = 'html';
+    }
     var template = isPreCompiled(templateName) ?
       Handlebars.templates[templateName] : cache[getCacheKey(templateName)];
     var content = template(data);
-    $this.html(content).trigger('render.handlebars', [templateName, data]);
+    $this[domMethod].call($this, content).trigger('render.handlebars', [templateName, data]);
   }
 
   function cacheTemplate(templateName, templateContent) {
@@ -91,25 +94,25 @@
       }
     } else {
       switch (arguments[0]) {
-        case 'partial':
-          if (arguments.length < 3) {
-            registerPartial(arguments[1], arguments[1]);
-          } else {
-            registerPartial(arguments[1], arguments[2]);
-          }
-          break;
-        case 'helper':
-          Handlebars.registerHelper(arguments[1], arguments[2]);
-          break;
-        default:
-          throw 'invalid action specified to jQuery.handlebars: ' + arguments[0];
+      case 'partial':
+        if (arguments.length < 3) {
+          registerPartial(arguments[1], arguments[1]);
+        } else {
+          registerPartial(arguments[1], arguments[2]);
+        }
+        break;
+      case 'helper':
+        Handlebars.registerHelper(arguments[1], arguments[2]);
+        break;
+      default:
+        throw 'invalid action specified to jQuery.handlebars: ' + arguments[0];
       }
     }
   };
 
-  $.fn.render = function (templateName, data) {
+  $.fn.render = function (templateName, data, domMethod) {
     if (isPreCompiled(templateName) || isCached(templateName)) {
-      render(this, templateName, data);
+      render(this, templateName, data, domMethod);
       return this;
     }
     var promise = null;
@@ -127,8 +130,8 @@
     var $this = this;
     promise.done(function (template) {
       cacheTemplate(templateName, template);
-      render($this, templateName, data);
-    }).fail(function( jqXHR, textStatus, errorThrown) {
+      render($this, templateName, data, domMethod);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
       throw new Error('template: ' + templateName + ' ' + errorThrown);
     });
     return this;
