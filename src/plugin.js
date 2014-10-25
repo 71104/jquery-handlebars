@@ -70,15 +70,22 @@
 		}
 	};
 
-	$.fn.render = function (templateName, data) {
-		var url = resolveTemplatePath(templateName);
+	$.fn.render = function (templateName, data, callback) {
+		var url = resolveTemplatePath(templateName),
+		    $this = this,
+
+			applyTemplate = function () { // applies html and triggers event
+				var args = [templateName, data];
+				$this.html(cache[url](data)).trigger('render.handlebars', args);
+				$.isFunction(callback) && callback.apply($this, args);
+			};
+
 		if (cache.hasOwnProperty(url)) {
-			this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
+			applyTemplate();
 		} else {
-			var $this = this;
 			$.get(url, function (template) {
 				cache[url] = Handlebars.compile(template);
-				$this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
+				applyTemplate();
 			}, 'text');
 		}
 		return this;
