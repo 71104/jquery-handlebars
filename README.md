@@ -48,6 +48,21 @@ $('#some-element').render('content', {
 
 The second argument to the `render` method is of course the context to use in Handlebars to render the template.
 
+```javascript
+// will fetch <template.handlebars> and render to the DOM element whose id is "content"
+$('#content').render('template', {
+	field1: 'Hello',
+	field2: 'world!'
+}, function () {
+	$('#content2').render('template2', {
+		field1: 'Another template rendered'
+	});
+});
+```
+
+You can also use the third parameter to pass a callback function to be executed after successful application of the
+handlebars template. This helps. chaining multiple template loads.
+
 Helpers and partials
 --------------------
 

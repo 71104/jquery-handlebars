@@ -70,15 +70,29 @@
 		}
 	};
 
-	$.fn.render = function (templateName, data) {
-		var url = resolveTemplatePath(templateName);
+	$.fn.render = function (templateName, data, callback) {
+		var url = resolveTemplatePath(templateName),
+		    $this = this,
+
+			applyTemplate = function () { // applies html and triggers event
+				var args = [templateName, data];
+				
+				if ($.isFunction(callback)) {
+					$.when($this.html(cache[url](data)).trigger('render.handlebars', args)).done(function () {
+						callback.apply($this, args);
+					});
+				}
+				else {
+					$this.html(cache[url](data)).trigger('render.handlebars', args);
+				}
+			};
+
 		if (cache.hasOwnProperty(url)) {
-			this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
+			applyTemplate();
 		} else {
-			var $this = this;
 			$.get(url, function (template) {
 				cache[url] = Handlebars.compile(template);
-				$this.html(cache[url](data)).trigger('render.handlebars', [templateName, data]);
+				applyTemplate();
 			}, 'text');
 		}
 		return this;
