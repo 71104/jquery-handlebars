@@ -76,8 +76,15 @@
 
 			applyTemplate = function () { // applies html and triggers event
 				var args = [templateName, data];
-				$this.html(cache[url](data)).trigger('render.handlebars', args);
-				$.isFunction(callback) && callback.apply($this, args);
+				
+				if ($.isFunction(callback)) {
+					$.when($this.html(cache[url](data)).trigger('render.handlebars', args)).done(function () {
+						callback.apply($this, args);
+					});
+				}
+				else {
+					$this.html(cache[url](data)).trigger('render.handlebars', args);
+				}
 			};
 
 		if (cache.hasOwnProperty(url)) {
